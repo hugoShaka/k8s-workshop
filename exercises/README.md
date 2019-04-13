@@ -21,7 +21,7 @@ It takes about 3 minutes to bootstrap the cluster.
 
 ### Pre-flight checks
 
-The whole worhshop is built to avoid modifying you system.
+The whole workshop is built to avoid modifying your system.
 
 **We will use `workshopctl` instead of `kubectl` everytime.**
 It's only a wrapper to use local kubectl with the workshop config.
@@ -57,6 +57,8 @@ Now you're good to go :).
 ## Level 1
 
 The basics : reading objects and creating your first pod.
+
+[Link to instructions](./level1/README.md)
 
 ## Level 2
 

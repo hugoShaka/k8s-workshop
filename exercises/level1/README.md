@@ -46,8 +46,8 @@ It looks like we gave a wrong argument to the container.
 *Note: This is a stupid reference to The Hitchhiker's Guide to the Galaxy, the
 answer should be 42.*
 
-As the `describe` indicates the answer is passed through environment variables
-(as advised in the 12 factor manifesto)[https://12factor.net/], and the
+The `describe` indicates the answer is passed through environment variables
+[as advised in the 12 factor manifesto](https://12factor.net/), and the
 variable does look wrongly defined.
 
 ## Writing a working slackbot manifest
@@ -57,14 +57,14 @@ working pod.
 
 Let's create a file `pod-working-slackbot.yml`
 
-To create a pod you can take a look here in the pod documentation :
-https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/#pod-templates
+To create a pod you can take a look [here in the pod documentation](
+https://kubernetes.io/docs/concepts/workloads/pods/pod-overview/#pod-templates)
 
-To pass environment variables the documentation is here
-https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/#define-an-environment-variable-for-a-container
+To pass environment variables [the documentation is here](
+https://kubernetes.io/docs/tasks/inject-data-application/define-environment-variable-container/#define-an-environment-variable-for-a-container)
 
-If you don't know what variables to define you can take a look at the actual
-slackbot bot by doing:
+If you don't know what variables to define you can take a look at the
+deployed-but-broken slackbot by doing:
 
 ```
 ./workshopctl -n level1 get pod broken-slackbot -o yaml
