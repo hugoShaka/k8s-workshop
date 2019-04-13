@@ -1,0 +1,5 @@
+# vi: ft=dockerfile
+FROM python:alpine
+COPY . .
+RUN pip install -r requirements.txt
+CMD ["python","slackbot.py"]

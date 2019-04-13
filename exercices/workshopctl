@@ -1,0 +1,42 @@
+#!/bin/bash
+# vi: ft=sh
+
+KUBECTL_PATH=".tmp/"
+KUBECTL_BIN="kubectl"
+KUBECONFIG_PATH=".output/kubeconfig.yaml"
+
+FMT="\e[1m\e[95m"
+RST_FMT="\e[0m"
+
+
+install_kubectl() {
+  echo -e "$FMT Installing kubectl in current folder, will not affect your operating system $RST_FMT"
+  set -x
+  pushd .
+  cd "$KUBECTL_PATH"
+  LATEST_RELEASE="$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)"
+  if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    echo -e "$FMT Linux detected $RST_FMT"
+    END_URL="/bin/linux/amd64/kubectl"
+  elif [[ "$OSTYPE" == "darwin"* ]]; then
+    echo -e "$FMT OSX detected $RST_FMT"
+    END_URL="/bin/darwin/amd64/kubectl"
+  else
+    echo -e "$FMT OS not correctly detected, aborting $RST_FMT"
+    exit 1
+  fi
+
+  curl -LO "https://storage.googleapis.com/kubernetes-release/release/${LATEST_RELEASE}${END_URL}" -o "$KUBECTL_BIN"
+  chmod +x "$KUBECTL_BIN"
+  popd
+  echo -e "$FMT Initial setup ok ! $RST_FMT"
+  set +x
+}
+
+
+mkdir -p "$KUBECTL_PATH"
+if [ ! -f "${KUBECTL_PATH}${KUBECTL_BIN}" ]; then
+    install_kubectl
+fi
+
+exec "${KUBECTL_PATH}${KUBECTL_BIN}" --kubeconfig="$KUBECONFIG_PATH" $@
