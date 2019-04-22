@@ -14,11 +14,11 @@ spec:
   - name: python-slackbot
     image: hugoshaka/k8s-workshop-level1-slackbot
     env:
-    - name: "SLACK_TOKEN"
+    - name: "WORKSHOP_SLACK_TOKEN"
       value: "THIS IS AN INVALID VALUE"
-    - name: "SLACK_CHANNEL"
+    - name: "WORKSHOP_SLACK_CHANNEL"
       value: "THIS IS AN INVALID VALUE"
-    - name: "YOUR_NAME"
+    - name: "WORKSHOP_YOUR_NAME"
       value: "THIS IS AN INVALID VALUE"
     - name: "ANSWER_TO_THE_ULTIMATE_QUESTION_OF_LIFE_THE_UNIVERSE_AND_EVERYTHING"
       value: "43"
