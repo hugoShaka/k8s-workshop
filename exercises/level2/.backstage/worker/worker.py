@@ -3,14 +3,14 @@ import time
 
 from amqpstorm import Connection
 
-connection = Connection('127.0.0.1', 'guest', 'guest')
+connection = Connection('rabbitmq', 'guest', 'guest')
 channel = connection.channel()
-channel.queue.declare(queue='hello')
+channel.queue.declare(queue='customer_orders')
 
 
 while True:
     time.sleep(2)
-    result = channel.basic.get(queue='hello', no_ack=False)
+    result = channel.basic.get(queue='customer_orders', no_ack=False)
     if not result:
         print("Channel Empty.")
     else:

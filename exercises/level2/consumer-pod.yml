@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: consumer
+  namespace: level2
+  labels:
+    app: consumer
+spec:
+ containers:
+ - name: worker
+   image: hugoshaka/k8s-workshop-level2-worker
