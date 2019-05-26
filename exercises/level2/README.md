@@ -37,23 +37,20 @@ You can get our consumer pod running by doing
 The consumer is stateless.
 
 Side note about statelessness :
+> There are many "stateless" definitions but I like this one :
+> * the output o(t) to an input i(t) will not depend of past inputs or outputs
+>   i(t-1), o(t-1), i(t-2), ...
+> * all the inputs are treated independently, each input got its output, always
+>   the same.
+> 
+> This means we can take two identical stateless systems, send to each one half
+> the requests and they will be able to provide the good outputs but twice as
+> fast as with only one system.
 
-There are many "stateless" definitions but I like this one :
-* the output o(t) to an input i(t) will not depend of past inputs or outputs
-  i(t-1), o(t-1), i(t-2), ...
-* all the inputs are treated independently, each input got its output, always
-  the same.
-
-This means we can take two identical stateless systems, send to each one half
-the requests and they will be able to provide the good outputs but twice as
-fast as with only one system.
-
-Most of real systems are not stateless because we need to remember a lot of
-stuff, for example how many credits does this user still have on its account.
-A common pattern is to extract stateless parts out of the system, this way
-we're able to "scale" them as we want.
-
-End of side note
+> Most of real systems are not stateless because we need to remember a lot of
+> stuff, for example how many credits does this user still have on its account.
+> A common pattern is to extract stateless parts out of the system, this way
+> we're able to "scale" them as we want.
 
 Here our consumer pod treats all orders independently, so we can start the same
 pod many times in order to consume orders faster.
