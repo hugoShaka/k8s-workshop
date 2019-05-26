@@ -18,8 +18,8 @@ growing delays.
 1. Let's take a look at the queue service
 
 Use a web browser to access : http://rabbitmq.level2.localhost:8090/
-login/password : guest/guest
-On the Queues page you can access our queue "customer_orders" by clicking on
+(login/password = guest/guest)
+On the Queues page you can access our queue `customer_orders` by clicking on
 its name.
 
 Are we able to keep up with the load ?
@@ -28,17 +28,20 @@ We currently only have one consumer, regarding it's consumption rate, how many
 would we need to get back on track ?
 
 You can get our consumer pod running by doing
+```
 ./workshopctl -n level2 get pod consumer
+```
 
 ## Planning the scale out
 
 The consumer is stateless.
 
 Side note about statelessness :
+
 There are many "stateless" definitions but I like this one :
-- the output o(t) to an input i(t) will not depend of past inputs or outputs
+* the output o(t) to an input i(t) will not depend of past inputs or outputs
   i(t-1), o(t-1), i(t-2), ...
-- all the inputs are treated independently, each input got its output, always
+* all the inputs are treated independently, each input got its output, always
   the same.
 
 This means we can take two identical stateless systems, send to each one half
@@ -137,7 +140,7 @@ You can follow the start of the pods by doing
 
 On the rabbitmq management interface the queue size should be going down.
 
-## Other king of pod sets
+## Other kind of pod sets
 
 We won't use them for now but you should know that there are other kind of pod
 sets :

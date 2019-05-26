@@ -64,6 +64,8 @@ The basics : reading objects and creating your first pod.
 
 How to automatically deploy, restart and scale pods.
 
+[Link to instructions](./level2/README.md)
+
 ## Level 3
 
 It's about keeping an history, updating smoothly and rolling back.
