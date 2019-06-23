@@ -1,2 +1,3 @@
-Create a Job
-Create a Cron JOB
+Create an ingress.
+Use specific rules to select hostnames or paths.
+Add TLS support.
