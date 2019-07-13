@@ -68,31 +68,50 @@ How to automatically deploy, restart and scale pods.
 
 ## Level 3
 
-It's about keeping an history, updating smoothly and rolling back.
+It's about keeping an history and labeling stuff.
+
+[Link to instructions](./level3/README.md)
 
 ## Level 4
 
-Managing application's configuration though kubernetes objects.
+It's about health, and probes to check if everything is okay.
+
+[Link to instructions](./level4/README.md)
 
 ## Level 5
+
+Managing application's configuration though kubernetes objects.
+
+[Link to instructions](./level5/README.md)
+
+## Level 6
 
 Playing with network, how pods advertise themselves and how can one app contact
 another inside the cluster.
 
-## Level 6
+[Link to instructions](./level6/README.md)
+
+## Level 7
 
 Real stuff here : exposing your application to the internet, managing incoming
 connections.
 
-## Level 7
-
-Storing data, asking for persistant storage.
+[Link to instructions](./level7/README.md)
 
 ## Level 8
 
-Doing side-cars and stuff before your application starts.
+Storing data, asking for persistant storage.
+
+[Link to instructions](./level8/README.md)
 
 ## Level 9
 
 How to run jobs, one-off or periodically
 
+[Link to instructions](./level9/README.md)
+
+## Level 10
+
+Handling different environments, using variables, leveraging CI/CD.
+
+[Link to instructions](./level10/README.md)
