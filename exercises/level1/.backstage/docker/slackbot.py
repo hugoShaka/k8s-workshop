@@ -38,6 +38,7 @@ def main():
             log.info("Good answer, going to say this on slack !")
             slack = Notifier(slack_token, slack_channel)
             slack.notify(f"Congrats {username} for finishing level 1 :tada:")
+            success = True
         else:
             log.info("Already good answer, nothing to do")
 
