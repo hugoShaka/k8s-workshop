@@ -12,7 +12,7 @@ metadata:
 spec:
   containers:
   - name: python-slackbot
-    image: hugoshaka/k8s-workshop-level1-slackbot
+    image: workshopk8s/k8s-workshop-level1-slackbot
     env:
     - name: "WORKSHOP_SLACK_TOKEN"
       value: "THIS IS AN INVALID VALUE"

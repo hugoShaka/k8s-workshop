@@ -109,7 +109,7 @@ spec:
     spec:
       containers:
       - name: producer
-        image: hugoshaka/k8s-workshop-level2-producer
+        image: workshopk8s/k8s-workshop-level2-producer
 ```
 
 ## Scaling out

@@ -9,4 +9,4 @@ metadata:
 spec:
  containers:
  - name: worker
-   image: hugoshaka/k8s-workshop-level2-worker
+   image: workshopk8s/k8s-workshop-level2-worker
