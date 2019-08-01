@@ -1,0 +1,98 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: level9
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cron
+  namespace: level9
+spec:
+  ports:
+    - name: 'app'
+      port: 80
+      targetPort: 3000
+    - name: 'mailhog'
+      port: 8025
+      targetPort: 8025
+    - name: 'smtp'
+      port: 1025
+      targetPort: 1025
+  selector:
+    service: app-cron
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: app-cron
+  name: app-cron
+  namespace: level9
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-cron
+  revisionHistoryLimit: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: app-cron
+        service: app-cron
+      name: app-cron
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: app
+          image: workshopk8s/k8s-workshop-level9-app:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+          livenessProbe:
+            httpGet:
+              path: /ping
+              port: 3000
+        - name: mailhog
+          image: mailhog/mailhog:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 1025
+            - containerPort: 8025
+          readinessProbe:
+            tcpSocket:
+              port: 8025
+          livenessProbe:
+            tcpSocket:
+              port: 8025
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: cron
+  namespace: level9
+spec:
+  rules:
+    - host: app.level9.localhost
+      http:
+        paths:
+          - backend:
+              serviceName: cron
+              servicePort: 80
+    - host: mail.level9.localhost
+      http:
+        paths:
+          - backend:
+              serviceName: cron
+              servicePort: 8025

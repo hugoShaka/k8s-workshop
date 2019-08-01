@@ -1,0 +1,31 @@
+version: '3.4'
+
+services:
+  app:
+    build:
+      context: .
+      target: base
+    image: workshopk8s/k8s-workshop-level9-app:dev
+    restart: "no"
+    ports:
+      - "3000:3000"
+    volumes:
+      - ".:/home/docker:rw"
+    working_dir: "/home/docker"
+    user: "node"
+    command: "yarn start:dev"
+    networks:
+      - "app"
+
+  mailhog:
+    image: mailhog/mailhog
+    restart: "no"
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+    networks:
+      - "app"
+
+networks:
+  app:
+    driver: bridge

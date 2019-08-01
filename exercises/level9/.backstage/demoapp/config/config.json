@@ -1,0 +1,14 @@
+{
+  "development": {
+    "dialect": "sqlite",
+    "storage": "/home/docker/database.dev.sqlite3"
+  },
+  "test": {
+    "dialect": "sqlite",
+    "storage": "/home/docker/database.test.sqlite3"
+  },
+  "production": {
+    "dialect": "sqlite",
+    "storage": "/home/docker/database.prod.sqlite3"
+  }
+}
