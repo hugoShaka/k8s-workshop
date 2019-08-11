@@ -1,0 +1,45 @@
+version: '3.7'
+
+services:
+
+  nginx:
+    image: nginx:1.17-alpine
+    restart: "no"
+    ports:
+      - "80:80"
+    volumes:
+      - "./.docker/nginx.conf:/etc/nginx/conf.d/default.conf:ro"
+      - "./public:/home/docker/public"
+    networks:
+      app:
+        aliases:
+          - symfony.localhost
+
+  php:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+      target: php_base
+    image: workshopk8s/k8s-workshop-level4:dev
+    restart: "no"
+    working_dir: "/home/docker"
+    volumes:
+      - ".:/home/docker"
+    networks:
+      - "app"
+
+  db:
+    image: postgres:11-alpine
+    restart: "no"
+    environment:
+      - "POSTGRES_USER=devops"
+      - "POSTGRES_PASSWORD=devops"
+      - "POSTGRES_DB=symfony"
+    volumes:
+      - "./.data/db:/var/lib/postgresql/data"
+    networks:
+      - "app"
+
+networks:
+  app:
+    driver: bridge
