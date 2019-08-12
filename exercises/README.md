@@ -5,16 +5,17 @@
 ### Requirements
 
 In order to run this workshop you will need :
-* docker
-* docker-compose
 * Linux or OSX
+* docker (CE edition v18.09+)
+* docker-compose (v1.23+)
+* gnu make
 
-### Starting demo kubernetes
+### Starting kubernetes demo cluster
 
 Just run
 
 ```
-docker-compose up -d
+make start
 ```
 
 It takes about 3 minutes to bootstrap the cluster.
@@ -112,6 +113,6 @@ How to run jobs, one-off or periodically
 
 ## Level 10
 
-Handling different environments, using variables, leveraging CI/CD.
+Handling different environments, using variables, leveraging CI/CD, discover & play with kustomize
 
 [Link to instructions](./level10/README.md)
