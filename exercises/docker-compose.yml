@@ -7,23 +7,23 @@
 version: '3'
 services:
   server:
-    image: rancher/k3s:v0.6.1
+    image: rancher/k3s:v0.8.0
     command: server --disable-agent
     environment:
     - K3S_CLUSTER_SECRET=somethingtotallyrandom
     - K3S_KUBECONFIG_OUTPUT=/output/kubeconfig.yaml
     - K3S_KUBECONFIG_MODE=666
     volumes:
-    - k3s-server:/var/lib/rancher/k3s
+    - k3s-server:/var/lib/rancher/k3s:z
     # This is just so that we get the kubeconfig file out
-    - .output:/output
+    - .output:/output:z
     - "./level1/.backstage/level1.yml:/var/lib/rancher/k3s/server/manifests/level1.yml:ro"
     - "./level2/.backstage/level2.yml:/var/lib/rancher/k3s/server/manifests/level2.yml:ro"
     ports:
     - 6443:6443
 
   node:
-    image: rancher/k3s:v0.6.1
+    image: rancher/k3s:v0.8.0
     tmpfs:
     - /run
     - /var/run
