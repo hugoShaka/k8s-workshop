@@ -4,9 +4,8 @@ NC=\033[0m
 BOLD=\033[1m
 
 # Vars
-DOCKER_COMPOSE_CMD  = docker-compose -f docker-compose.yml
-KUBECTL_CONFIG_PATH = .output/kubeconfig.yaml
-KUBECTL_CMD         = kubectl --kubeconfig=${KUBECTL_CONFIG_PATH}
+DOCKER_COMPOSE_CMD  = docker-compose
+KUBECTL_CMD         = ./workshopctl
 
 ##
 ## Targets to manage the local k3s cluster
