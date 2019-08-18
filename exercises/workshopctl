@@ -33,10 +33,21 @@ install_kubectl() {
   set +x
 }
 
+customize_completion() {
+    sed "s/kubectl/workshopctl/g" | \
+    sed 's!^\(\s\+\)complete \(.*\) workshopctl$!\1complete \2 ./workshopctl!'
+}
+
+generate_completion() {
+  echo -e "$FMT Generating completion $RST_FMT"
+  "$KUBECTL_PATH/$KUBECTL_BIN" completion bash | customize_completion > "$KUBECTL_PATH/completion.bash"
+  "$KUBECTL_PATH/$KUBECTL_BIN" completion zsh | customize_completion > "$KUBECTL_PATH/completion.zsh"
+}
 
 mkdir -p "$KUBECTL_PATH"
 if [ ! -f "${KUBECTL_PATH}${KUBECTL_BIN}" ]; then
     install_kubectl
+    generate_completion
 fi
 
 exec "${KUBECTL_PATH}${KUBECTL_BIN}" --kubeconfig="$KUBECONFIG_PATH" $@
