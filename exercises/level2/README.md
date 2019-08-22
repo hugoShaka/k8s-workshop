@@ -17,7 +17,7 @@ growing delays.
 
 1. Let's take a look at the queue service
 
-Use a web browser to access : http://rabbitmq.level2.localhost:8090/
+Use a web browser to access : http://rabbitmq.level2.localhost
 (login/password = guest/guest)
 On the Queues page you can access our queue `customer_orders` by clicking on
 its name.
