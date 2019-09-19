@@ -1,0 +1,20 @@
+{
+  "name": "demoapp",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start:dev": "nodemon bin/www",
+    "start:prod": "node bin/www"
+  },
+  "dependencies": {
+    "debug": "~2.6.9",
+    "dotenv": "^8.0.0",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1",
+    "twig": "~0.10.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}

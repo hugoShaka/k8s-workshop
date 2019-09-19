@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  app:
+    build:
+      context: .
+      target: dev
+    image: workshopk8s/k8s-workshop-level5:dev
+    restart: "no"
+    ports:
+      - "3000:3000"
+    volumes:
+      - ".:/home/docker:rw"
+    working_dir: "/home/docker"
+    user: "node"

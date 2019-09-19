@@ -1,0 +1,19 @@
+{% extends 'layout.twig' %}
+
+{% block stylesheet %}
+<style>
+  div {
+    padding: 0.5em;
+    background-color: {{ bcolor }};
+    border: 2px solid {{ bcolor }};
+    border-radius: 5px;
+  }
+</style>
+{% endblock %}
+
+{% block body %}
+  <div>
+    <h1>{{title}}</h1>
+    <p>Welcome to {{title}}</p>
+  </div>
+{% endblock %}
