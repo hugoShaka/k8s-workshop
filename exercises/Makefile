@@ -117,7 +117,9 @@ level7.logs: template.level7.logs ## Display all ressources of level7 namespace
 ##
 
 level8.start: template.level8.start ## Start level8
+	${KUBECTL_CMD} apply -f level8/.backstage/local-path-provisionner.yml
 level8.stop: template.level8.stop ## Stop  level8
+	-${KUBECTL_CMD} delete namespace local-path-storage
 level8.logs: template.level8.logs ## Display all ressources of level8 namespace
 
 ##
