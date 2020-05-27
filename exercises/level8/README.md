@@ -3,7 +3,7 @@
 - Volume
 
 ### Objectives
-
+- Understand volume sharing
 - Undestanding data persitence
 - Learn about volumes in Kubernetes
 - Write and use a Persistent volume claim
@@ -20,6 +20,45 @@
 ./workshopctl -n level8 get all
 ```
 
+#### Sharing Data
+- Go to website (http://upload.level8.localhost/) and upload a file
+- Try to download the file. 
+
+This will fail because the file is uploaded in the PHP container but is not shared with the nginx container (https://kubernetes.io/docs/concepts/storage/volumes/). The type of volume used to share data between container in the same pod is `emptyDir` (https://kubernetes.io/docs/concepts/storage/volumes/#emptydir ) 
+
+- Add the volume to the existing deployment.
+The yaml of the deployment to modify :
+```yaml
+---
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: upload-deployment
+  labels:
+    app: upload
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: upload
+  template:
+    metadata:
+      labels:
+        app: upload
+    spec:
+      containers:
+      - name: upload-nginx
+        image: workshopk8s/k8s-workshop-level8-upload-nginx
+        ports:
+        - containerPort: 80
+      - name: upload-php
+        image: workshopk8s/k8s-workshop-level8-upload-php
+```
+
+Once you apply this new deployment, you can test the result by uploading and downloading a file.
+
+#### Persisting Data
 - Go to website (http://upload.level8.localhost/) and upload a file
 - Delete the pod to force a restart
 ```bash
@@ -28,19 +67,14 @@
 
 - Go to the website (http://upload.level8.localhost/) again, the file uploaded disappeared
 
-File or anything stored on the disk is not persisted in a restart, for that you need to put a persistant volume in place:
+File or anything stored on the disk is not persisted in a restart, for that you need to put a persistant volume in place (https://kubernetes.io/docs/concepts/storage/persistent-volumes)
 
-https://kubernetes.io/docs/concepts/storage/volumes/
-https://kubernetes.io/docs/concepts/storage/persistent-volumes
+The main type used is `persistentVolumeClaim` https://kubernetes.io/docs/concepts/storage/volumes/#persistentvolumeclaim to get a more permanent type of volume whithout having to know the details
 
-The main types used are:
-- `emptyDir` https://kubernetes.io/docs/concepts/storage/volumes/#emptydir to share data between container on the same pod (Clean each time a pod is stopped)
-- `persistentVolumeClaim` https://kubernetes.io/docs/concepts/storage/volumes/#persistentvolumeclaim to get a more permanent type of volume whithout having to know the details
-
-Fo our example, a persistent volume provisionning has already been set up, you will need to:
+For our example, a persistent volume provisionning has already been set up, you will need to:
 - Create a persistent volume claim (PVC) (https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims) with the storage class `local-path`
 - Add the volume to the existing deployment (https://kubernetes.io/docs/concepts/storage/persistent-volumes/#claims-as-volumes)
-The yaml of the deployment to modify :
+The yaml of the deployment to modify:
 ```yaml
 ---
 apiVersion: apps/v1

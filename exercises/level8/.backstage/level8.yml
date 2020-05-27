@@ -13,7 +13,7 @@ spec:
   ports:
     - name: web
       port: 80
-      targetPort: 8080
+      targetPort: 80
   selector:
     app: upload
   type: ClusterIP
@@ -49,12 +49,9 @@ spec:
         app: upload
     spec:
       containers:
-      - name: upload
-        image: workshopk8s/k8s-workshop-level8-upload
+      - name: upload-nginx
+        image: workshopk8s/k8s-workshop-level8-upload-nginx
         ports:
-        - containerPort: 8080
-        env:
-        - name: "PORT"
-          value: "8080"
-        - name: "UPLOAD_DIR"
-          value: "/uploads"
+        - containerPort: 80
+      - name: upload-php
+        image: workshopk8s/k8s-workshop-level8-upload-php
